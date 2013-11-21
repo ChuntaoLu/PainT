@@ -1,6 +1,6 @@
 from Tkinter import *
 from tkColorChooser import askcolor
-__author__ = 'luffy'
+__author__ = 'Chuntao Lu'
 
 
 class Paint(object):
@@ -35,6 +35,7 @@ class Paint(object):
         self.line_width = self.DEFAULT_PEN_SIZE
         self.color = self.DEFAULT_COLOR
         self.eraser_on = False
+        self.active_button = self.pen_button
         self.c.bind('<B1-Motion>', self.paint)
         self.c.bind('<ButtonRelease-1>', self.reset)
 
@@ -58,13 +59,12 @@ class Paint(object):
 
     #TODO: reset canvas
     #TODO: undo and redo
+    #TODO: draw triangle, rectangle, oval, text
 
-    def activate_button(self, a_button, eraser_mode=False):
-        a_button.config(relief=SUNKEN)
-        deactivated_buttons = {self.pen_button, self.brush_button,
-                               self.eraser_button} - {a_button}
-        for button in deactivated_buttons:
-            button.config(relief=RAISED)
+    def activate_button(self, some_button, eraser_mode=False):
+        self.active_button.config(relief=RAISED)
+        some_button.config(relief=SUNKEN)
+        self.active_button = some_button
         self.eraser_on = eraser_mode
 
     def paint(self, event):
