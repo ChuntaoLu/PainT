@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from Tkinter import *
 from tkColorChooser import askcolor
 __author__ = 'Chuntao Lu'
@@ -50,7 +53,7 @@ class Paint(object):
 
     def choose_color(self):
         self.eraser_on = False
-        self.color = askcolor()[1]
+        self.color = askcolor(color=self.color)[1]
 
     def use_eraser(self):
         self.activate_button(self.eraser_button, eraser_mode=True)
